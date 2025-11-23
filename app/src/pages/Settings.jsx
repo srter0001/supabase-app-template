@@ -5,6 +5,7 @@ import './Settings.css';
 
 export default function Settings() {
   const [user, setUser] = useState(null);
+  const [userType, setUserType] = useState('FREE'); // Default to FREE
   const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('account');
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -85,16 +86,37 @@ export default function Settings() {
   };
 
   useEffect(() => {
-    const getUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        navigate('/login');
-      } else {
+    const getUserAndProfile = async () => {
+      try {
+        // 1. Get Auth Session
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          navigate('/login');
+          return;
+        } 
+        
         setUser(session.user);
+
+        // 2. Fetch User Profile Type from database
+        const { data: profile, error } = await supabase
+          .from('user_profiles')
+          .select('user_type')
+          .eq('id', session.user.id)
+          .single();
+
+        if (profile) {
+          setUserType(profile.user_type);
+        }
+
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
-    getUser();
+
+    getUserAndProfile();
   }, [navigate]);
 
   if (loading) return <div className="loading">Loading...</div>;
@@ -174,6 +196,15 @@ export default function Settings() {
             <div>
               <h1>Account</h1>
               <div className="settings-section">
+                <div className="settings-item">
+                  <div className="item-content">
+                    <label className="item-label">Account Plan</label>
+                    {/* Inline styles removed and replaced with classes */}
+                    <div className={`plan-badge ${userType === 'ACTIVE' ? 'premium' : 'free'}`}>
+                      {userType}
+                    </div>
+                  </div>
+                </div>
                 <div className="settings-item">
                   <div className="item-content">
                     <label className="item-label">Email Address</label>

@@ -519,3 +519,22 @@
     margin-left: 0;
   }
 }
+
+.plan-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.plan-badge.premium {
+  background-color: #8cf38f;
+  color: #2c5229;
+}
+
+.plan-badge.free {
+  background-color: #e5e7eb;
+  color: #374151;
+}

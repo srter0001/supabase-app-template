@@ -67,7 +67,7 @@ export default function Login() {
         </button>
       </form>
       <p className="text-link">
-        Don't have an account? <Link to="/signin">Sign up</Link>
+        Don't have an account? <Link to="/signup">Sign up</Link>
       </p>
     </div>
   );
