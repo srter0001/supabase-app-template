@@ -1,0 +1,56 @@
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.navbar-button {
+  background: transparent !important;
+  color: #007bff;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-family: inherit;
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  text-decoration: none;
+}
+
+.navbar-button:hover {
+  color: #0056b3;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.navbar-button:focus {
+  background: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.navbar-button:active {
+  color: #003d82;
+  background: transparent !important;
+}
